@@ -1,5 +1,26 @@
 {
+  "name": "nd",
+  "scripts": {
+    "dev": "live-server"
+  },
   "dependencies": {
     "maplibre-gl": "^5.5.0"
-  }
+  },
+  "version": "1.0.0",
+  "description": "Navigation display for simulator at PolyMTL",
+  "main": "map.js",
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fadilm777/NavigationDisplay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fadilm777/NavigationDisplay/issues"
+  },
+  "homepage": "https://github.com/fadilm777/NavigationDisplay#readme"
 }
