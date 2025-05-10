@@ -4,7 +4,9 @@
     "dev": "live-server"
   },
   "dependencies": {
-    "maplibre-gl": "^5.5.0"
+    "dotenv": "^16.5.0",
+    "maplibre-gl": "^5.5.0",
+    "ws": "^8.18.2"
   },
   "version": "1.0.0",
   "description": "Navigation display for simulator at PolyMTL",
