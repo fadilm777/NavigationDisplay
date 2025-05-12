@@ -1,12 +1,20 @@
 import { map } from './src/map.js'
+import { middleware } from './src/nav.js';
 
 
 map.on('load', () => {
 
+  map.jumpTo({
+    center: [-73.742157, 45.464088]
+  })
   const socket = new WebSocket("ws://127.0.0.1:8001")
 
   socket.addEventListener("message", (event) => {
-    console.log("Message from server ", event.data);
+
+    const data = JSON.parse(event.data)
+    if (data.request.type == "location") {
+      middleware(data.request.method, data.body)
+    }
   });
 
 })
