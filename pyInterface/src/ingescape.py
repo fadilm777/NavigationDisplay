@@ -62,6 +62,7 @@ class IngescapeDelegate:
         self.longitude = value  
 
 class MockIngescapeDelegate:
+    """Mock ingescape delegate for debugging"""
 
     def __init__(self, latitude: float, longitude: float, altitude:float) -> None:
         self.altitude = altitude

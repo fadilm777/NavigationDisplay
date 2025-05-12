@@ -1,3 +1,5 @@
+"""Mock script for debugging system"""
+
 from pynput import keyboard
 from src.ingescape import MockIngescapeDelegate
 from src.plane import Navigator

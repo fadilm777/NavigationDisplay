@@ -4,5 +4,6 @@ from src.plane import Navigator
 igs = IngescapeDelegate()
 nav = Navigator(igs)
 
+#start Navigator server
 nav.start_server()
 
