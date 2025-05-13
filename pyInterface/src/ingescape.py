@@ -9,7 +9,7 @@ class IngescapeDelegate:
         self.latitude = None
         self.longitude = None
 
-        device = "Wi-Fi"
+        device = "Ethernet" 
         port = 5670
 
         igs.agent_set_name("gps agent")

@@ -1,9 +1,10 @@
 from src.ingescape import IngescapeDelegate 
 from src.plane import Navigator
 
-igs = IngescapeDelegate()
-nav = Navigator(igs)
 
-#start Navigator server
-nav.start_server()
+if __name__ == "__main__":
+    igs = IngescapeDelegate()
+    nav = Navigator(igs)
 
+    #start Navigator server
+    nav.start_server()

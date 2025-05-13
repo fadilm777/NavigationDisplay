@@ -11,9 +11,9 @@ class Navigator:
         self.ingescapeDelegate = ingescapeDelegate
 
     async def _server(self):
-        server = await serve(self._connection_handler, "localhost", 8001) # start websocket server
+        server = await serve(self._connection_handler, "localhost", 8325) # start websocket server
         print("Websocket server started")
-        print("Sending aircraft data from localhost:8001")
+        print("Sending aircraft data from localhost:8325")
         await server.serve_forever() # run server forever
 
     async def _connection_handler(self, websocket):
@@ -36,4 +36,3 @@ class Navigator:
     def start_server(self):
         """This function should be called to start server"""
         asyncio.run(self._server())
-
