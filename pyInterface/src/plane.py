@@ -10,10 +10,10 @@ class Navigator:
     def __init__(self, ingescapeDelegate: IngescapeDelegate) -> None:
         self.ingescapeDelegate = ingescapeDelegate
 
-    async def _server(self):
-        server = await serve(self._connection_handler, "localhost", 8325) # start websocket server
+    async def _server(self, port):
+        server = await serve(self._connection_handler, "localhost", port) # start websocket server
         print("Websocket server started")
-        print("Sending aircraft data from localhost:8325")
+        print(f"Sending aircraft data from localhost:{port}")
         await server.serve_forever() # run server forever
 
     async def _connection_handler(self, websocket):
@@ -27,12 +27,13 @@ class Navigator:
                 "body": {
                     "latitude": self.ingescapeDelegate.latitude,
                     "longitude": self.ingescapeDelegate.longitude,
-                    "altitude": self.ingescapeDelegate.altitude
+                    "altitude": self.ingescapeDelegate.altitude,
+                    "bearing": self.ingescapeDelegate.bearing
                 }
             }
 
             await websocket.send(json.dumps(message)) # send message
 
-    def start_server(self):
+    def start_server(self, port=8325):
         """This function should be called to start server"""
-        asyncio.run(self._server())
+        asyncio.run(self._server(port))

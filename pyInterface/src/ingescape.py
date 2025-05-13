@@ -8,6 +8,7 @@ class IngescapeDelegate:
         self.altitude = None
         self.latitude = None
         self.longitude = None
+        self.bearing = None
 
         device = "Ethernet" 
         port = 5670
@@ -47,6 +48,8 @@ class IngescapeDelegate:
         igs.observe_input("altitude", self.altitude_input_callback, None)
         igs.observe_input("latitude", self.latitude_input_callback, None)
         igs.observe_input("longitude", self.longitude_input_callback, None)
+        igs.observe_input("heading", self.bearing_input_callback, None)
+
         
         # Start agent
         igs.start_with_device(device, port)
@@ -54,6 +57,9 @@ class IngescapeDelegate:
 
     def altitude_input_callback(self, io_type, name, value_type, value, my_data):
         self.altitude = value  
+
+    def bearing_input_callback(self, io_type, name, value_type, value, my_data):
+        self.bearing = value  
 
     def latitude_input_callback(self, io_type, name, value_type, value, my_data):
         self.latitude = value 
@@ -64,8 +70,9 @@ class IngescapeDelegate:
 class MockIngescapeDelegate:
     """Mock ingescape delegate for debugging"""
 
-    def __init__(self, latitude: float, longitude: float, altitude:float) -> None:
+    def __init__(self, bearing: float, latitude: float, longitude: float, altitude:float) -> None:
         self.altitude = altitude
+        self.bearing = bearing
         self.latitude = latitude
         self.longitude = longitude
 

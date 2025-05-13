@@ -27,7 +27,6 @@ map.on('load', () => {
   var socket = new WebSocket("ws://127.0.0.1:8325")
 
   socket.addEventListener("message", (event) => {
-
     const data = JSON.parse(event.data)
     if (data.request.type == "location") {
       middleware(data.request.method, data.body)

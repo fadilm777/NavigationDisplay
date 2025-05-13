@@ -5,7 +5,7 @@ from src.ingescape import MockIngescapeDelegate
 from src.plane import Navigator
 import threading 
 
-igs = MockIngescapeDelegate(latitude=45.473595, longitude=-73.747288, altitude=0)
+igs = MockIngescapeDelegate(bearing=0, latitude=45.473595, longitude=-73.747288, altitude=0)
 nav = Navigator(igs)
 
 def locationUpdater(key):
@@ -22,9 +22,9 @@ def locationUpdater(key):
     if key == keyboard.Key.down:
         igs.latitude -= 0.000018
     if key == keyboard.Key.left:
-        igs.longitude += 0.000018
+        igs.bearing -= 0.05 
     if key == keyboard.Key.right:
-        igs.longitude -= 0.000018
+        igs.bearing += 0.05 
 
 listener = keyboard.Listener(on_press=locationUpdater)
 thread = threading.Thread(target=listener.start)

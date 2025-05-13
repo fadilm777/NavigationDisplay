@@ -23,21 +23,23 @@ class FrameRateHandler {
   }
 }
 
-let rateHandler = new FrameRateHandler(33)
+let rateHandler = new FrameRateHandler(30)
 
 export function middleware(method, data) {
   if (method === "PUT") {
-    updateLocation(data.latitude, data.longitude)
+    updateLocation(data.latitude, data.longitude, data.bearing)
   }
 }
 
-function updateLocation(latitude, longitude) {
+function updateLocation(latitude, longitude, bearing) {
   const now = Date.now();
   if (now - rateHandler.getLastupdate() > rateHandler.getThrottleMs()) {
     map.easeTo({
       center: [longitude, latitude],
+      bearing: bearing,
       duration: 0
     });
+
     rateHandler.setLastUpdate(now)
   }
 }
