@@ -3,7 +3,7 @@ import ingescape as igs
 import signal
 import time
 from echo import *
-from coordinates_converter import local_to_global
+#from coordinates_converter import local_to_global
 
 # UDP configuration
 UDP_IP = "127.0.0.1"  # IP to bind to
@@ -18,8 +18,6 @@ device = "Ethernet"  # Automatically selects network device if not provided
 is_interrupted = False
 verbose = False
 
-# Variables to store received data
-position_data = {"x": 0.0, "y": 0.0, "z": 0.0}
 
 # Signal handler for graceful exit
 def signal_handler(signal_received, frame):
@@ -38,19 +36,18 @@ def start_udp_listener(sock):
             data, addr = sock.recvfrom(1024)
             decoded_data = data.decode().strip()
             x, y, z = map(float, decoded_data.split(","))
-            position_data["x"], position_data["y"], position_data["z"] = x, y, z
-            print(f"Received data from {addr}: X={x}, Y={y}, Z={z}")
+            print(f"Received data from {addr}: latitude={x}, longitude={y}, heading={z}")
 
-            igs.output_set_double("x", x)
-            igs.output_set_double("y", y)
-            igs.output_set_double("z", z)
+            #igs.output_set_double("x", x)
+            #igs.output_set_double("y", y)
+            #igs.output_set_double("z", z)
 
-            latitude, longitude, altitude = local_to_global(x,y,z,0,0,0)
+            latitude, longitude, heading = x,y,z
             
             # Update Ingescape outputs
             igs.output_set_double("latitude", latitude)
             igs.output_set_double("longitude", longitude)
-            igs.output_set_double("altitude", altitude)
+            igs.output_set_double("heading", heading)
             
         except Exception as e:
             print("Error while receiving or processing data:", e)
@@ -68,10 +65,10 @@ if __name__ == "__main__":
     # Define outputs
     igs.output_create("latitude", igs.DOUBLE_T, None)
     igs.output_create("longitude", igs.DOUBLE_T, None)
-    igs.output_create("altitude", igs.DOUBLE_T, None)
-    igs.output_create("x", igs.DOUBLE_T, None)
-    igs.output_create("y", igs.DOUBLE_T, None)
-    igs.output_create("z", igs.DOUBLE_T, None)
+    igs.output_create("heading", igs.DOUBLE_T, None)
+    #igs.output_create("x", igs.DOUBLE_T, None)
+    #igs.output_create("y", igs.DOUBLE_T, None)
+    #igs.output_create("z", igs.DOUBLE_T, None)
 
     # Start Ingescape agent
     igs.start_with_device(device, port)

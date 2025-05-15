@@ -40,12 +40,11 @@ class IngescapeDelegate:
                     sys.exit(1)
 
         # Create inputs
-        igs.input_create("altitude", igs.INTEGER_T, None)
+        igs.input_create("heading", igs.DOUBLE_T, None)
         igs.input_create("latitude", igs.DOUBLE_T, None)
         igs.input_create("longitude", igs.DOUBLE_T, None)
 
         # Observe inputs
-        igs.observe_input("altitude", self.altitude_input_callback, None)
         igs.observe_input("latitude", self.latitude_input_callback, None)
         igs.observe_input("longitude", self.longitude_input_callback, None)
         igs.observe_input("heading", self.bearing_input_callback, None)
