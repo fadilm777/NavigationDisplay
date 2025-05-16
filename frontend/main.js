@@ -21,9 +21,6 @@ map.on('load', () => {
     }
   })
 
-  map.jumpTo({
-    center: [-73.742157, 45.464088]
-  })
   var socket = new WebSocket("ws://127.0.0.1:8325")
 
   socket.addEventListener("message", (event) => {

@@ -1,29 +1,8 @@
 import { map } from './map.js'
+import { FrameRateService } from './services.js' 
 
-class FrameRateHandler {
-  constructor(frameRate) {
-    this.lastUpdate = 0;
-    this.throttleMs = frameRate;
-  }
-
-  setThrottleMs(throttle) {
-    this.throttleMs = throttle
-  }
-
-  getThrottleMs() {
-    return this.throttleMs
-  }
-
-  getLastupdate() {
-    return this.lastUpdate
-  }
-
-  setLastUpdate(update) {
-    this.lastUpdate = update
-  }
-}
-
-let rateHandler = new FrameRateHandler(30)
+const plane = document.getElementById("plane");
+let rateHandler = new FrameRateService(30)
 
 export function middleware(method, data) {
   if (method === "PUT") {
@@ -31,14 +10,19 @@ export function middleware(method, data) {
   }
 }
 
+function updateBearing(bearing) {
+	plane.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`; 
+}
+
 function updateLocation(latitude, longitude, bearing) {
   const now = Date.now();
   if (now - rateHandler.getLastupdate() > rateHandler.getThrottleMs()) {
     map.easeTo({
       center: [longitude, latitude],
-      bearing: bearing,
       duration: 0
     });
+
+    updateBearing(bearing)
 
     rateHandler.setLastUpdate(now)
   }
