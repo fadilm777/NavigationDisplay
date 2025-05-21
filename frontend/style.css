@@ -34,7 +34,7 @@ html {
 }
 
 #navSideBar {
-  width: 120px;
+  width: 200px;
   height: calc(100vh - 51.5px);
   margin-top: 51.5px;
   background-color: #202020;
@@ -44,6 +44,10 @@ html {
   left: 0;
   padding: 0px;
   z-index: 9999;
+  display: grid;
+  gap: 5px;
+  justify-content: center;
+  font-family: 'Roboto Mono', monospace;
 }
 
 #navTopBar {
@@ -81,4 +85,80 @@ html {
 .column {
   background-color: #202020;
   padding: 0px;
+}
+
+.meterContainer {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.arc {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.meterStick {
+  width: 3px;
+  height: 65px;
+  transform: rotate(-48deg);
+  background: white;
+  position: absolute;
+  bottom: 37px;
+  left: 50%;
+  z-index: 2;
+  transform-origin: bottom center;
+
+}
+
+.meterTitle {
+  position: absolute;
+  left: 90%;
+  bottom: 60px;
+  font-size: 20px;
+}
+
+.barMeterTitle {
+  position: absolute;
+  left: 3%;
+  bottom: 18px;
+  font-size: 15px;
+}
+
+.meterRating {
+  position: absolute;
+  left: 70%;
+  bottom: 25px;
+  font-size: 24px;
+  color: #00FF00;
+}
+
+.barMeterRating {
+  position: absolute;
+  left: 80%;
+  bottom: 18px;
+  font-size: 20px;
+}
+
+.barMeterContainer {
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  height: 10px
+}
+
+.triangle {
+  position: absolute;
+  z-index: 2;
+  left: 25%;
+  bottom: 4px;
+  width: 100%;
+  height: 100%
+}
+
+.bar {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
