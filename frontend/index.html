@@ -11,14 +11,71 @@
 </head>
 
 <body>
-    <h1> Loading... </h1>
-    <div id="navSideBar"></div>
-    <div id="navTopBar"></div>
     <div id="map">
         <script type="module" src="main.js"></script>
         <img id="plane" src="assets/plane.png" />
         <img id="navCircle" src="assets/navCircle.png" />
     </div>
+    <div id="navTopBar">
+        <div class="column">
+            <div class="topRowGrid">
+                <div class="topRow" style="align-items: flex-end;">
+                    <span style="font-size: 13px;">NAV1 </span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                </div>
+                <div class="topRow" style="align-items:flex-end;">
+                    <span style="font-size: 13px;">NAV2 </span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="topRowGrid" style="gap: 2px;">
+                <div class="topRow" style="align-items: flex-end; justify-content: center; padding-left: 0;">
+                    <span style="font-size: 12px;">GS</span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 19px; color: #FF00FF;">0</span>
+                    <span style="width: 60px;"></span>
+                    <span style="font-size: 12px;">DTK </span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 19px; color: #FF00FF;">099</span>
+                    <span style="width: 60px;"></span>
+                    <span style="font-size: 12px;">TRK</span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 19px; color: #FF00FF;">057</span>
+                </div>
+                <div class="topRow" style="justify-content: center; padding-left:0; color: #00FFFF;">NAV - DEFAULT NAV
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="topRowGrid">
+                <div class="topRow" style="align-items: flex-end;">
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 13px;"></span>
+                    <span style="font-size: 12px;">COM1 </span>
+                </div>
+                <div class="topRow" style="align-items: flex-end;">
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 13px;"></span>
+                    <span style="font-size: 12px;">COM2 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="navSideBar"></div>
+
+
 
 </body>
 
