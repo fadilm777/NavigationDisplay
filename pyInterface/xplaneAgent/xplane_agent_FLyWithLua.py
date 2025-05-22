@@ -33,21 +33,21 @@ def on_agent_event_callback(event, uuid, name, event_data, my_data):
 def start_udp_listener(sock):
     while not is_interrupted:
         try:
-            data, addr = sock.recvfrom(1024)
+            data, _ = sock.recvfrom(1024)
             decoded_data = data.decode().strip()
-            x, y, z = map(float, decoded_data.split(","))
-            print(f"Received data from {addr}: latitude={x}, longitude={y}, heading={z}")
+            x, y, z, GS = map(float, decoded_data.split(","))
 
             #igs.output_set_double("x", x)
             #igs.output_set_double("y", y)
             #igs.output_set_double("z", z)
 
-            latitude, longitude, heading = x,y,z
+            latitude, longitude, heading, ground_speed = x,y,z,GS
             
             # Update Ingescape outputs
             igs.output_set_double("latitude", latitude)
             igs.output_set_double("longitude", longitude)
             igs.output_set_double("heading", heading)
+            igs.output_set_double("GS", ground_speed)
             
         except Exception as e:
             print("Error while receiving or processing data:", e)
@@ -66,6 +66,7 @@ if __name__ == "__main__":
     igs.output_create("latitude", igs.DOUBLE_T, None)
     igs.output_create("longitude", igs.DOUBLE_T, None)
     igs.output_create("heading", igs.DOUBLE_T, None)
+    igs.output_create("GS", igs.DOUBLE_T, None)
     #igs.output_create("x", igs.DOUBLE_T, None)
     #igs.output_create("y", igs.DOUBLE_T, None)
     #igs.output_create("z", igs.DOUBLE_T, None)

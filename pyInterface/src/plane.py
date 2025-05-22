@@ -19,7 +19,7 @@ class Navigator:
     async def _connection_handler(self, websocket):
         while True:
 
-            message = {
+            locationMessage = {
                 "request": {
                     "method": "PUT",
                     "type": "location"
@@ -31,8 +31,18 @@ class Navigator:
                     "bearing": self.ingescapeDelegate.bearing
                 }
             }
+            await websocket.send(json.dumps(locationMessage)) # send location
 
-            await websocket.send(json.dumps(message)) # send message
+            navInfoMessage = {
+                "request": {
+                    "method": "PUT",
+                    "type": "navInfo"
+                },
+                "body": {
+                    "GS": self.ingescapeDelegate.GS
+                }
+            }
+            await websocket.send(json.dumps(navInfoMessage)) # send navigation info
 
     def start_server(self, port=8325):
         """This function should be called to start server"""

@@ -9,6 +9,7 @@ class IngescapeDelegate:
         self.latitude = None
         self.longitude = None
         self.bearing = None
+        self.GS = None
 
         device = "Ethernet" 
         port = 5670
@@ -43,13 +44,14 @@ class IngescapeDelegate:
         igs.input_create("heading", igs.DOUBLE_T, None)
         igs.input_create("latitude", igs.DOUBLE_T, None)
         igs.input_create("longitude", igs.DOUBLE_T, None)
+        igs.input_create("GS", igs.DOUBLE_T, None)
 
         # Observe inputs
         igs.observe_input("latitude", self.latitude_input_callback, None)
         igs.observe_input("longitude", self.longitude_input_callback, None)
         igs.observe_input("heading", self.bearing_input_callback, None)
+        igs.observe_input("GS", self.GS_input_callback, None)
 
-        
         # Start agent
         igs.start_with_device(device, port)
 
@@ -65,6 +67,9 @@ class IngescapeDelegate:
 
     def longitude_input_callback(self, io_type, name, value_type, value, my_data):
         self.longitude = value  
+
+    def GS_input_callback(self, io_type, name, value_type, value, my_data):
+        self.GS = value
 
 class MockIngescapeDelegate:
     """Mock ingescape delegate for debugging"""
