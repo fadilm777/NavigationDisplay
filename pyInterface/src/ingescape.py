@@ -5,11 +5,15 @@ class IngescapeDelegate:
 
     def __init__(self) -> None:
 
-        self.altitude = None
-        self.latitude = None
-        self.longitude = None
-        self.bearing = None
-        self.GS = None
+        self.aircraft_data = {
+            "altitude": None,
+            "latitude": None,
+            "longitude": None,
+            "heading": None,
+            "GS": None,
+            "DTK": None,
+            "TRK": None,
+        }
 
         device = "Ethernet" 
         port = 5670
@@ -45,31 +49,27 @@ class IngescapeDelegate:
         igs.input_create("latitude", igs.DOUBLE_T, None)
         igs.input_create("longitude", igs.DOUBLE_T, None)
         igs.input_create("GS", igs.DOUBLE_T, None)
+        igs.input_create("DTK", igs.DOUBLE_T, None)
+        igs.input_create("TRK", igs.DOUBLE_T, None)
 
         # Observe inputs
-        igs.observe_input("latitude", self.latitude_input_callback, None)
-        igs.observe_input("longitude", self.longitude_input_callback, None)
-        igs.observe_input("heading", self.bearing_input_callback, None)
-        igs.observe_input("GS", self.GS_input_callback, None)
+        igs.observe_input("latitude", self.input_callback, None)
+        igs.observe_input("longitude", self.input_callback, None)
+        igs.observe_input("heading", self.input_callback, None)
+        igs.observe_input("GS", self.input_callback, None)
+        igs.observe_input("DTK", self.input_callback, None)
+        igs.observe_input("TRK", self.input_callback, None)
 
         # Start agent
         igs.start_with_device(device, port)
 
 
-    def altitude_input_callback(self, io_type, name, value_type, value, my_data):
-        self.altitude = value  
+    def input_callback(self, *args):
+        name = args[1]
+        value = args[3]
 
-    def bearing_input_callback(self, io_type, name, value_type, value, my_data):
-        self.bearing = value  
-
-    def latitude_input_callback(self, io_type, name, value_type, value, my_data):
-        self.latitude = value 
-
-    def longitude_input_callback(self, io_type, name, value_type, value, my_data):
-        self.longitude = value  
-
-    def GS_input_callback(self, io_type, name, value_type, value, my_data):
-        self.GS = value
+        if name in self.aircraft_data:
+            self.aircraft_data[name] = value
 
 class MockIngescapeDelegate:
     """Mock ingescape delegate for debugging"""
