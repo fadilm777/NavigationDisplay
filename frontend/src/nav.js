@@ -4,12 +4,15 @@ import { FrameRateService } from './services.js'
 const navCircle = document.getElementById("navCircle")
 let rateHandler = new FrameRateService(30)
 
-const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI"]
+const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C"]
 const maxRatings = {
   "N1": 90,
   "N2": 90,
   "EGT": 90,
-  "DIFF PSI": 100
+  "DIFF PSI": 100,
+  "ALT FT": 100,
+  "OIL PSI": 100,
+  "OIL C": 100
 }
 
 export function locationMiddleware(method, data) {
@@ -58,7 +61,7 @@ function updateNavInfo(data) {
 
     const navItemBarRating = document.getElementById(`${navItemName}barRating`)
     if (navItemBarRating) {
-      const barRating = (data[navItemName] / maxRatings[navItemName] * 100)
+      const barRating = (data[navItemName] / maxRatings[navItemName] * 100) - 50
       navItemBarRating.style.left = `${barRating}%`
     }
   }

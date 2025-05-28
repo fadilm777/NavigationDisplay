@@ -35,9 +35,9 @@ def start_udp_listener(sock):
         try:
             data, _ = sock.recvfrom(1024)
             decoded_data = data.decode().strip()
-            x, y, z, GS, DTK, TRK, N1, N2, EGT, DIFF_PSI = map(float, decoded_data.split(","))
+            x, y, z, GS, DTK, TRK, N1, N2, EGT, DIFF_PSI, ALT_FT, OIL_PSI, OIL_C = map(float, decoded_data.split(","))
 
-            latitude, longitude, heading, ground_speed, dtk, trk, n1, n2, egt, diff_psi = x,y,z,GS,DTK,TRK,N1,N2,EGT,DIFF_PSI
+            latitude, longitude, heading, ground_speed, dtk, trk, n1, n2, egt, diff_psi, alt_ft, oil_psi, oil_c = x,y,z,GS,DTK,TRK,N1,N2,EGT,DIFF_PSI,ALT_FT,OIL_PSI,OIL_C
             
             # Update Ingescape outputs
             igs.output_set_double("latitude", latitude)
@@ -49,7 +49,10 @@ def start_udp_listener(sock):
             igs.output_set_double("N1", n1)
             igs.output_set_double("N2", n2)
             igs.output_set_double("EGT", egt)
-            igs.output_set_double("DIFF_PSI", diff_psi)
+            igs.output_set_double("DIFF PSI", diff_psi)
+            igs.output_set_double("ALT FT", alt_ft)
+            igs.output_set_double("OIL PSI", oil_psi)
+            igs.output_set_double("OIL C", oil_c)
             
         except Exception as e:
             print("Error while receiving or processing data:", e)
@@ -74,7 +77,10 @@ if __name__ == "__main__":
     igs.output_create("N1", igs.DOUBLE_T, None)
     igs.output_create("N2", igs.DOUBLE_T, None)
     igs.output_create("EGT", igs.DOUBLE_T, None)
-    igs.output_create("DIFF_PSI", igs.DOUBLE_T, None)
+    igs.output_create("DIFF PSI", igs.DOUBLE_T, None)
+    igs.output_create("ALT FT", igs.DOUBLE_T, None)
+    igs.output_create("OIL PSI", igs.DOUBLE_T, None)
+    igs.output_create("OIL C", igs.DOUBLE_T, None)
 
     # Start Ingescape agent
     igs.start_with_device(device, port)

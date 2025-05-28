@@ -20,6 +20,9 @@ class IngescapeDelegate:
             "N2": None,
             "EGT": None,
             "DIFF PSI": None,
+            "ALT FT": None,
+            "OIL PSI": None,
+            "OIL C": None
         }
 
         device = "Ethernet" 
@@ -72,21 +75,3 @@ class IngescapeDelegate:
 
         if name in self.aircraft_nav:
             self.aircraft_nav[name] = value
-
-class MockIngescapeDelegate:
-    """Mock ingescape delegate for debugging"""
-
-    def __init__(self, bearing: float, latitude: float, longitude: float, altitude:float) -> None:
-        self.altitude = altitude
-        self.bearing = bearing
-        self.latitude = latitude
-        self.longitude = longitude
-
-    def setAltitude(self, altitude: float):
-        self.altitude = altitude
-
-    def setLongitude(self, longitude: float):
-        self.longitude = longitude
-
-    def setLatitude(self, latitude: float):
-        self.latitude = latitude
