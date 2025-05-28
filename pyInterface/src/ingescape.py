@@ -5,14 +5,21 @@ class IngescapeDelegate:
 
     def __init__(self) -> None:
 
-        self.aircraft_data = {
+        self.aircraft_location = {
             "altitude": None,
             "latitude": None,
             "longitude": None,
             "heading": None,
+        }
+
+        self.aircraft_nav = {
             "GS": None,
             "DTK": None,
             "TRK": None,
+            "N1": None,
+            "N2": None,
+            "EGT": None,
+            "DIFF PSI": None,
         }
 
         device = "Ethernet" 
@@ -44,21 +51,13 @@ class IngescapeDelegate:
                         print("    ", d)
                     sys.exit(1)
 
-        # Create inputs
-        igs.input_create("heading", igs.DOUBLE_T, None)
-        igs.input_create("latitude", igs.DOUBLE_T, None)
-        igs.input_create("longitude", igs.DOUBLE_T, None)
-        igs.input_create("GS", igs.DOUBLE_T, None)
-        igs.input_create("DTK", igs.DOUBLE_T, None)
-        igs.input_create("TRK", igs.DOUBLE_T, None)
+        for location_item in self.aircraft_location:
+            igs.input_create(location_item, igs.DOUBLE_T, None)
+            igs.observe_input(location_item, self.input_callback, None)
 
-        # Observe inputs
-        igs.observe_input("latitude", self.input_callback, None)
-        igs.observe_input("longitude", self.input_callback, None)
-        igs.observe_input("heading", self.input_callback, None)
-        igs.observe_input("GS", self.input_callback, None)
-        igs.observe_input("DTK", self.input_callback, None)
-        igs.observe_input("TRK", self.input_callback, None)
+        for nav_item in self.aircraft_nav:
+            igs.input_create(nav_item, igs.DOUBLE_T, None)
+            igs.observe_input(nav_item, self.input_callback, None)
 
         # Start agent
         igs.start_with_device(device, port)
@@ -68,8 +67,11 @@ class IngescapeDelegate:
         name = args[1]
         value = args[3]
 
-        if name in self.aircraft_data:
-            self.aircraft_data[name] = value
+        if name in self.aircraft_location:
+            self.aircraft_location[name] = value
+
+        if name in self.aircraft_nav:
+            self.aircraft_nav[name] = value
 
 class MockIngescapeDelegate:
     """Mock ingescape delegate for debugging"""

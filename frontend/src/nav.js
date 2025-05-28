@@ -14,7 +14,7 @@ const maxRatings = {
 
 export function locationMiddleware(method, data) {
   if (method === "PUT") {
-    updateLocation(data.latitude, data.longitude, data.bearing)
+    updateLocation(data.latitude, data.longitude, data.heading)
   }
 }
 

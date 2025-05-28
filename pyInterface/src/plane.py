@@ -17,7 +17,8 @@ class Navigator:
         await server.serve_forever() # run server forever
 
     async def _connection_handler(self, websocket):
-        aircraft_data = self.ingescapeDelegate.aircraft_data
+        aircraft_location = self.ingescapeDelegate.aircraft_location
+        aircraft_nav = self.ingescapeDelegate.aircraft_nav
 
         while True:
 
@@ -26,12 +27,7 @@ class Navigator:
                     "method": "PUT",
                     "type": "location"
                 },
-                "body": {
-                    "latitude": aircraft_data["latitude"],
-                    "longitude": aircraft_data["longitude"],
-                    "altitude": aircraft_data["altitude"],
-                    "bearing": aircraft_data["heading"]
-                }
+                "body": aircraft_location 
             }
             await websocket.send(json.dumps(locationMessage)) # send location
 
@@ -40,11 +36,7 @@ class Navigator:
                     "method": "PUT",
                     "type": "navInfo"
                 },
-                "body": {
-                    "GS": aircraft_data["GS"],
-                    "DTK": aircraft_data["DTK"],
-                    "TRK": aircraft_data["TRK"],
-                }
+                "body": aircraft_nav 
             }
             await websocket.send(json.dumps(navInfoMessage)) # send navigation info
 

@@ -35,19 +35,21 @@ def start_udp_listener(sock):
         try:
             data, _ = sock.recvfrom(1024)
             decoded_data = data.decode().strip()
-            x, y, z, GS = map(float, decoded_data.split(","))
+            x, y, z, GS, DTK, TRK, N1, N2, EGT, DIFF_PSI = map(float, decoded_data.split(","))
 
-            #igs.output_set_double("x", x)
-            #igs.output_set_double("y", y)
-            #igs.output_set_double("z", z)
-
-            latitude, longitude, heading, ground_speed = x,y,z,GS
+            latitude, longitude, heading, ground_speed, dtk, trk, n1, n2, egt, diff_psi = x,y,z,GS,DTK,TRK,N1,N2,EGT,DIFF_PSI
             
             # Update Ingescape outputs
             igs.output_set_double("latitude", latitude)
             igs.output_set_double("longitude", longitude)
             igs.output_set_double("heading", heading)
             igs.output_set_double("GS", ground_speed)
+            igs.output_set_double("DTK", dtk)
+            igs.output_set_double("TRK", trk)
+            igs.output_set_double("N1", n1)
+            igs.output_set_double("N2", n2)
+            igs.output_set_double("EGT", egt)
+            igs.output_set_double("DIFF_PSI", diff_psi)
             
         except Exception as e:
             print("Error while receiving or processing data:", e)
@@ -67,9 +69,12 @@ if __name__ == "__main__":
     igs.output_create("longitude", igs.DOUBLE_T, None)
     igs.output_create("heading", igs.DOUBLE_T, None)
     igs.output_create("GS", igs.DOUBLE_T, None)
-    #igs.output_create("x", igs.DOUBLE_T, None)
-    #igs.output_create("y", igs.DOUBLE_T, None)
-    #igs.output_create("z", igs.DOUBLE_T, None)
+    igs.output_create("DTK", igs.DOUBLE_T, None)
+    igs.output_create("TRK", igs.DOUBLE_T, None)
+    igs.output_create("N1", igs.DOUBLE_T, None)
+    igs.output_create("N2", igs.DOUBLE_T, None)
+    igs.output_create("EGT", igs.DOUBLE_T, None)
+    igs.output_create("DIFF_PSI", igs.DOUBLE_T, None)
 
     # Start Ingescape agent
     igs.start_with_device(device, port)
