@@ -11,7 +11,7 @@ const maxRatings = {
   "EGT": 1450,
   "DIFF PSI": 6,
   "ALT FT": 13000,
-  "OIL PSI": 100,
+  "OIL PSI": 115,
   "OIL C": 245
 }
 
