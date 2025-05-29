@@ -6,13 +6,13 @@ let rateHandler = new FrameRateService(30)
 
 const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C"]
 const maxRatings = {
-  "N1": 90,
-  "N2": 90,
-  "EGT": 90,
-  "DIFF PSI": 100,
-  "ALT FT": 100,
+  "N1": 100,
+  "N2": 100,
+  "EGT": 1450,
+  "DIFF PSI": 6,
+  "ALT FT": 13000,
   "OIL PSI": 100,
-  "OIL C": 100
+  "OIL C": 245
 }
 
 export function locationMiddleware(method, data) {
