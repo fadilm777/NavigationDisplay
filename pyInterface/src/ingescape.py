@@ -74,4 +74,7 @@ class IngescapeDelegate:
             self.aircraft_location[name] = value
 
         if name in self.aircraft_nav:
-            self.aircraft_nav[name] = value
+            if name == "ALT FT":
+                self.aircraft_nav[name] = (value // 50) * 50
+            else:
+                self.aircraft_nav[name] = value
