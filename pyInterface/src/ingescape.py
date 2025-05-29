@@ -22,7 +22,8 @@ class IngescapeDelegate:
             "DIFF PSI": None,
             "ALT FT": None,
             "OIL PSI": None,
-            "OIL C": None
+            "OIL C": None,
+            "FLAPS": None,
         }
 
         device = "Ethernet" 

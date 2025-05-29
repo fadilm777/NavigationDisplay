@@ -3,8 +3,9 @@ import { FrameRateService } from './services.js'
 
 const navCircle = document.getElementById("navCircle")
 let rateHandler = new FrameRateService(30)
+const flapsIndicator = document.getElementById("flapsIndicator")
 
-const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C"]
+const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C", "FLAPS"]
 const maxRatings = {
   "N1": 100,
   "N2": 100,
@@ -12,7 +13,8 @@ const maxRatings = {
   "DIFF PSI": 6,
   "ALT FT": 13000,
   "OIL PSI": 115,
-  "OIL C": 245
+  "OIL C": 245,
+  "FLAPS": 35
 }
 
 export function locationMiddleware(method, data) {
@@ -29,6 +31,10 @@ export function infoMiddleware(method, data) {
 
 function updateNavCircle(bearing) {
   navCircle.style.transform = `translate(-50%, -50%) rotate(${-bearing}deg)`;
+}
+
+function updateFlapsRating(rating) {
+  flapsIndicator.style.top = `${(rating * 4)}px`
 }
 
 function updateLocation(latitude, longitude, bearing) {
@@ -65,4 +71,6 @@ function updateNavInfo(data) {
       navItemBarRating.style.left = `${barRating}%`
     }
   }
+
+  updateFlapsRating(data["FLAPS"])
 }
