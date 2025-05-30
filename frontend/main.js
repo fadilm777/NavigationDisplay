@@ -1,5 +1,5 @@
 import { map } from './src/map.js'
-import { infoMiddleware, locationMiddleware } from './src/nav.js';
+import { middleware } from './src/nav.js';
 
 
 map.on('load', () => {
@@ -25,13 +25,8 @@ map.on('load', () => {
 
   socket.addEventListener("message", (event) => {
     const data = JSON.parse(event.data)
-
-    if (data.request.type === "location") {
-      locationMiddleware(data.request.method, data.body)
-    }
-
-    if (data.request.type === "navInfo") {
-      infoMiddleware(data.request.method, data.body)
+    if (data.request.type == "location") {
+      middleware(data.request.method, data.body)
     }
   });
 

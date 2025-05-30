@@ -34411,58 +34411,6 @@
       "properties": {
         "name": "KENLU"
       }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.2546,
-           45.2500
-        ]
-      },
-      "properties": {
-        "name": "BOBKI"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -74.5225,
-           45.2031
-        ]
-      },
-      "properties": {
-        "name": "MELTI"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.13549687,
-           45.06010007
-        ]
-      },
-      "properties": {
-        "name": "TORNI"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -78.4818,
-           44.0231
-        ]
-      },
-      "properties": {
-        "name": "RAGID"
-      }
     }
   ]
 }
