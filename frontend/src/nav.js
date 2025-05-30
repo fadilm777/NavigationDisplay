@@ -1,7 +1,7 @@
 import { map } from './map.js'
-import { FrameRateService } from './services.js' 
+import { FrameRateService } from './services.js'
 
-const plane = document.getElementById("plane");
+const navCircle = document.getElementById("navCircle")
 let rateHandler = new FrameRateService(30)
 
 export function middleware(method, data) {
@@ -10,8 +10,8 @@ export function middleware(method, data) {
   }
 }
 
-function updateBearing(bearing) {
-	plane.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`; 
+function updateNavCircle(bearing) {
+  navCircle.style.transform = `translate(-50%, -50%) rotate(${-bearing}deg)`;
 }
 
 function updateLocation(latitude, longitude, bearing) {
@@ -19,10 +19,11 @@ function updateLocation(latitude, longitude, bearing) {
   if (now - rateHandler.getLastupdate() > rateHandler.getThrottleMs()) {
     map.easeTo({
       center: [longitude, latitude],
-      duration: 0
+      duration: 0,
+      bearing: bearing
     });
 
-    updateBearing(bearing)
+    updateNavCircle(bearing)
 
     rateHandler.setLastUpdate(now)
   }
