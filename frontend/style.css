@@ -209,3 +209,8 @@ html {
   top: 0px;
   position: absolute;
 }
+
+.flapsMarker {
+  position: absolute;
+  left: 62%;
+}
