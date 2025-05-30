@@ -57,7 +57,9 @@ function updateNavInfo(data) {
     const navItemName = navItems[i]
 
     const navItem = document.getElementById(`${navItemName}value`)
-    navItem.textContent = `${data[navItemName]}`
+    if (navItem){
+      navItem.textContent = `${data[navItemName]}`
+    }
 
     const navItemRating = document.getElementById(`${navItemName}rating`)
     if (navItemRating) {
