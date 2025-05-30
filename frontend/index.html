@@ -11,11 +11,126 @@
 </head>
 
 <body>
-    <h1> Loading... </h1>
     <div id="map">
         <script type="module" src="main.js"></script>
         <img id="plane" src="assets/plane.png" />
         <img id="navCircle" src="assets/navCircle.png" />
+    </div>
+    <div id="navTopBar">
+        <div class="column">
+            <div class="topRowGrid">
+                <div class="topRow" style="align-items: flex-end;">
+                    <span style="font-size: 13px;">NAV1 </span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                </div>
+                <div class="topRow" style="align-items:flex-end;">
+                    <span style="font-size: 13px;">NAV2 </span>
+                    <span style="width: 7px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="topRowGrid" style="gap: 2px;">
+                <div class="topRow" style="align-items: flex-end; justify-content: center; padding-left: 0;">
+                    <span style="font-size: 12px;">GS</span>
+                    <span style="width: 7px;"></span>
+                    <span id="GSvalue" style="font-size: 19px; color: #FF00FF;">0</span>
+                    <span style="font-size: 12px; color: #FF00FF;">KT</span>
+                    <span style="width: 60px;"></span>
+                    <span style="font-size: 12px;">DTK </span>
+                    <span style="width: 7px;"></span>
+                    <span id="DTKvalue" style="font-size: 19px; color: #FF00FF;">099</span>
+                    <span style="width: 60px;"></span>
+                    <span style="font-size: 12px;">TRK</span>
+                    <span style="width: 7px;"></span>
+                    <span id="TRKvalue" style="font-size: 19px; color: #FF00FF;">057</span>
+                </div>
+                <div class="topRow" style="justify-content: center; padding-left:0; color: #00FFFF;">NAV - DEFAULT NAV
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="topRowGrid">
+                <div class="topRow" style="align-items: flex-end;">
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 13px;"></span>
+                    <span style="font-size: 12px;">COM1 </span>
+                </div>
+                <div class="topRow" style="align-items: flex-end;">
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 30px;"></span>
+                    <span style="font-size: 15px;"> 111.70</span>
+                    <span style="width: 13px;"></span>
+                    <span style="font-size: 12px;">COM2 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="navSideBar">
+        <div class="meterContainer" style="top: -9%" ;>
+            <img src="assets/arc.svg" class="arc">
+            <div class="meterTitle">N1</div>
+            <div id="N1value" class="meterRating">33.5</div>
+            <div id="N1rating" class="meterStick"></div>
+        </div>
+        <div class="meterContainer" style="top: -45%;">
+            <img src="assets/arc.svg" class="arc">
+            <div class="meterTitle">EGT</div>
+            <div id="EGTvalue" class="meterRating">1023</div>
+            <div id="EGTrating" class="meterStick"></div>
+        </div>
+        <div class="meterContainer" style="top: -85%;">
+            <img src="assets/arc.svg" class="arc">
+            <div class="meterTitle">N2</div>
+            <div id="N2value" class="meterRating">73.1</div>
+            <div id="N2rating" class="meterStick"></div>
+        </div>
+        <div class="barMeterContainer" style="top: -160px">
+            <img src="assets/bar.svg" class="bar">
+            <img id="DIFF PSIbarRating" src="assets/triangle.svg" class="triangle">
+            <div class="redZone" style="width: 28.5px; left: 83%;"></div>
+            <div id="DIFF PSI" class="barMeterTitle">DIFF PSI</div>
+            <div id="DIFF PSIvalue" class="barMeterRating">0.0</div>
+        </div>
+        <div class="barMeterContainer" style="top: -160px">
+            <img src="assets/bar.svg" class="bar">
+            <img id="ALT FTbarRating" src="assets/triangle.svg" class="triangle">
+            <div class="redZone" style="width: 39.5px; left: 77%;"></div>
+            <div id="ALT FT" class="barMeterTitle">ALT FT</div>
+            <div id="ALT FTvalue" class="barMeterRating">100</div>
+        </div>
+        <div class="barMeterContainer" style="top: -160px">
+            <img src="assets/emptyBar.svg" class="bar">
+            <img id="OIL PSIbarRating" src="assets/triangle.svg" class="triangle">
+            <div class="redZone" style="width: 16px; left: 90%;"></div>
+            <div class="greenZone" style="width: 71.5px; left: 40%;"></div>
+            <div id="OIL PSI" class="barMeterTitle">OIL PSI</div>
+            <div id="OIL PSIvalue" class="barMeterRating">49</div>
+        </div>
+        <div class="barMeterContainer" style="top: -160px">
+            <img src="assets/emptyBar.svg" class="bar">
+            <img id="OIL CbarRating" src="assets/triangle.svg" class="triangle">
+            <div class="redZone" style="width: 10.5px; left: 93%;"></div>
+            <div class="greenZone" style="width: 118.5px; left: 20%;"></div>
+            <div id="OIL C" class="barMeterTitle">OIL C</div>
+            <div id="OIL Cvalue" class="barMeterRating">100</div>
+        </div>
+    </div>
+    <div id="flapsSection">
+        <div>FLAPS</div>
+        <div style="height: 11px;"></div>
+        <img src="assets/flapsBar.svg" class="flapsBar">
+        <img id="flapsIndicator" src="assets/flapsIndicator.svg" class="flapsIndicator">
+        <div class="flapsMarker" style="top: 30%;">10</div>
+        <div class="flapsMarker" style="top: 80%">35</div>
     </div>
 
 </body>

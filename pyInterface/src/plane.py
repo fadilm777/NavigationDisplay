@@ -17,22 +17,28 @@ class Navigator:
         await server.serve_forever() # run server forever
 
     async def _connection_handler(self, websocket):
+        aircraft_location = self.ingescapeDelegate.aircraft_location
+        aircraft_nav = self.ingescapeDelegate.aircraft_nav
+
         while True:
 
-            message = {
+            locationMessage = {
                 "request": {
                     "method": "PUT",
                     "type": "location"
                 },
-                "body": {
-                    "latitude": self.ingescapeDelegate.latitude,
-                    "longitude": self.ingescapeDelegate.longitude,
-                    "altitude": self.ingescapeDelegate.altitude,
-                    "bearing": self.ingescapeDelegate.bearing
-                }
+                "body": aircraft_location 
             }
+            await websocket.send(json.dumps(locationMessage)) # send location
 
-            await websocket.send(json.dumps(message)) # send message
+            navInfoMessage = {
+                "request": {
+                    "method": "PUT",
+                    "type": "navInfo"
+                },
+                "body": aircraft_nav 
+            }
+            await websocket.send(json.dumps(navInfoMessage)) # send navigation info
 
     def start_server(self, port=8325):
         """This function should be called to start server"""

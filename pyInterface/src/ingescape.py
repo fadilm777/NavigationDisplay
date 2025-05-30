@@ -5,10 +5,26 @@ class IngescapeDelegate:
 
     def __init__(self) -> None:
 
-        self.altitude = None
-        self.latitude = None
-        self.longitude = None
-        self.bearing = None
+        self.aircraft_location = {
+            "altitude": None,
+            "latitude": None,
+            "longitude": None,
+            "heading": None,
+        }
+
+        self.aircraft_nav = {
+            "GS": None,
+            "DTK": None,
+            "TRK": None,
+            "N1": None,
+            "N2": None,
+            "EGT": None,
+            "DIFF PSI": None,
+            "ALT FT": None,
+            "OIL PSI": None,
+            "OIL C": None,
+            "FLAPS": None,
+        }
 
         device = "Ethernet" 
         port = 5670
@@ -39,47 +55,27 @@ class IngescapeDelegate:
                         print("    ", d)
                     sys.exit(1)
 
-        # Create inputs
-        igs.input_create("heading", igs.DOUBLE_T, None)
-        igs.input_create("latitude", igs.DOUBLE_T, None)
-        igs.input_create("longitude", igs.DOUBLE_T, None)
+        for location_item in self.aircraft_location:
+            igs.input_create(location_item, igs.DOUBLE_T, None)
+            igs.observe_input(location_item, self.input_callback, None)
 
-        # Observe inputs
-        igs.observe_input("latitude", self.latitude_input_callback, None)
-        igs.observe_input("longitude", self.longitude_input_callback, None)
-        igs.observe_input("heading", self.bearing_input_callback, None)
+        for nav_item in self.aircraft_nav:
+            igs.input_create(nav_item, igs.DOUBLE_T, None)
+            igs.observe_input(nav_item, self.input_callback, None)
 
-        
         # Start agent
         igs.start_with_device(device, port)
 
 
-    def altitude_input_callback(self, io_type, name, value_type, value, my_data):
-        self.altitude = value  
+    def input_callback(self, *args):
+        name = args[1]
+        value = args[3]
 
-    def bearing_input_callback(self, io_type, name, value_type, value, my_data):
-        self.bearing = value  
+        if name in self.aircraft_location:
+            self.aircraft_location[name] = value
 
-    def latitude_input_callback(self, io_type, name, value_type, value, my_data):
-        self.latitude = value 
-
-    def longitude_input_callback(self, io_type, name, value_type, value, my_data):
-        self.longitude = value  
-
-class MockIngescapeDelegate:
-    """Mock ingescape delegate for debugging"""
-
-    def __init__(self, bearing: float, latitude: float, longitude: float, altitude:float) -> None:
-        self.altitude = altitude
-        self.bearing = bearing
-        self.latitude = latitude
-        self.longitude = longitude
-
-    def setAltitude(self, altitude: float):
-        self.altitude = altitude
-
-    def setLongitude(self, longitude: float):
-        self.longitude = longitude
-
-    def setLatitude(self, latitude: float):
-        self.latitude = latitude
+        if name in self.aircraft_nav:
+            if name == "ALT FT":
+                self.aircraft_nav[name] = (value // 50) * 50
+            else:
+                self.aircraft_nav[name] = value
