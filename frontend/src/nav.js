@@ -5,7 +5,7 @@ const navCircle = document.getElementById("navCircle")
 let rateHandler = new FrameRateService(30)
 const flapsIndicator = document.getElementById("flapsIndicator")
 
-const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C", "FLAPS"]
+const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C", "FLAPS", "AMPS1", "AMPS2", "VOLTS1", "VOLTS2"]
 const maxRatings = {
   "N1": 100,
   "N2": 100,
@@ -52,27 +52,34 @@ function updateLocation(latitude, longitude, bearing) {
   }
 }
 
+function updateRating(navItemName, value) {
+  const navItemRating = document.getElementById(`${navItemName}rating`)
+  if (navItemRating) {
+    const rating = (value / maxRatings[navItemName] * 100) - 90
+    navItemRating.style.transform = `rotate(${rating}deg)`
+  }
+
+  const navItemBarRating = document.getElementById(`${navItemName}barRating`)
+  if (navItemBarRating) {
+    const barRating = (value / maxRatings[navItemName] * 100) - 50
+    navItemBarRating.style.left = `${barRating}%`
+  }
+
+  if (navItemName === "FLAPS") {
+    updateFlapsRating(value)
+  }
+}
+
 function updateNavInfo(data) {
   for (let i = 0; i < navItems.length; i++) {
     const navItemName = navItems[i]
 
     const navItem = document.getElementById(`${navItemName}value`)
-    if (navItem){
+    if (navItem) {
       navItem.textContent = `${data[navItemName]}`
     }
 
-    const navItemRating = document.getElementById(`${navItemName}rating`)
-    if (navItemRating) {
-      const rating = (data[navItemName] / maxRatings[navItemName] * 100) - 90
-      navItemRating.style.transform = `rotate(${rating}deg)`
-    }
-
-    const navItemBarRating = document.getElementById(`${navItemName}barRating`)
-    if (navItemBarRating) {
-      const barRating = (data[navItemName] / maxRatings[navItemName] * 100) - 50
-      navItemBarRating.style.left = `${barRating}%`
-    }
+    updateRating(navItemName, data[navItemName])
   }
 
-  updateFlapsRating(data["FLAPS"])
 }

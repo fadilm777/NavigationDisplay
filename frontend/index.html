@@ -78,18 +78,21 @@
         <div class="meterContainer" style="top: -9%" ;>
             <img src="assets/arc.svg" class="arc">
             <div class="meterTitle">N1</div>
+            <div style="left: 109%; font-size: 14px;" class="meterTitle">%</div>
             <div id="N1value" class="meterRating">33.5</div>
             <div id="N1rating" class="meterStick"></div>
         </div>
         <div class="meterContainer" style="top: -45%;">
             <img src="assets/arc.svg" class="arc">
             <div class="meterTitle">EGT</div>
+            <div style="left: 112%; font-size: 14px;" class="meterTitle">°F</div>
             <div id="EGTvalue" class="meterRating">1023</div>
             <div id="EGTrating" class="meterStick"></div>
         </div>
         <div class="meterContainer" style="top: -85%;">
             <img src="assets/arc.svg" class="arc">
             <div class="meterTitle">N2</div>
+            <div style="left: 109%; font-size: 14px;" class="meterTitle">%</div>
             <div id="N2value" class="meterRating">73.1</div>
             <div id="N2rating" class="meterStick"></div>
         </div>
@@ -122,6 +125,42 @@
             <div class="greenZone" style="width: 118.5px; left: 20%;"></div>
             <div id="OIL C" class="barMeterTitle">OIL C</div>
             <div id="OIL Cvalue" class="barMeterRating">100</div>
+        </div>
+        <div class="barMeterContainer" style="top: -160px">
+            <img style="width: 130px;" src="assets/emptyBar.svg" class="bar">
+            <img style="transform: rotate(180deg); width: 130px;" src="assets/emptyBar.svg" class="bar">
+            <img id="AMPS1barRating" src="assets/triangle.svg" class="triangle">
+            <img id="AMPS2barRating" style="transform: rotate(180deg); bottom: -13px;" id="AMPSbarRating"
+                src="assets/triangle.svg" class="triangle">
+            <div class="redZone" style="width: 10.5px; left: 50%;"></div>
+            <div class="yellowZone" style="width: 130px; left: 0%;"></div>
+            <div id="AMPS" class="barMeterTitle">AMPS</div>
+            <div id="AMPS1value" style="position: absolute;
+                                       left: 74%;
+                                       bottom: 0px;
+                                       font-size: 18px">16.0</div>
+            <div id="AMPS2value" style="position: absolute;
+                                       left: 74%;
+                                       bottom: -18px;
+                                       font-size: 18px">11.0</div>
+        </div>
+        <div class="barMeterContainer" style="top: -160px">
+            <img style="width: 130px;" src="assets/emptyBar.svg" class="bar">
+            <img style="transform: rotate(180deg); width: 130px;" src="assets/emptyBar.svg" class="bar">
+            <img id="VOLTS1barRating" src="assets/triangle.svg" class="triangle">
+            <img id="VOLTS2barRating" style="transform: rotate(180deg); bottom: -13px;" id="VOLTSbarRating"
+                src="assets/triangle.svg" class="triangle">
+            <div class="redZone" style="width: 10.5px; left: 50%;"></div>
+            <div class="yellowZone" style="width: 130px; left: 0%;"></div>
+            <div id="VOLTS" class="barMeterTitle">VOLTS</div>
+            <div id="VOLTS1value" style="position: absolute;
+                                       left: 74%;
+                                       bottom: 0px;
+                                       font-size: 18px">16.0</div>
+            <div id="VOLTS2value" style="position: absolute;
+                                       left: 74%;
+                                       bottom: -18px;
+                                       font-size: 18px">11.0</div>
         </div>
     </div>
     <div id="flapsSection">

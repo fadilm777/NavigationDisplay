@@ -24,6 +24,10 @@ class IngescapeDelegate:
             "OIL PSI": None,
             "OIL C": None,
             "FLAPS": None,
+            "AMPS1": None,
+            "AMPS2": None,
+            "VOLTS1": None,
+            "VOLTS2": None
         }
 
         device = "Ethernet" 
