@@ -90,10 +90,5 @@ map.on('load', () => {
       flightPlanMiddleware(data.request.method, data.body)
     }
   });
-
-  const testing_dummy = {
-    waypoints: [[-73.5818, 45.3654], [-74.2546, 45.2500]]
-  }
-  flightPlanMiddleware("PUT", testing_dummy)
 })
 
