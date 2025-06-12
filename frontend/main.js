@@ -43,7 +43,7 @@ map.on('load', () => {
     },
     paint: {
       'line-color': '#FFFFFF',
-      'line-width': 3
+      'line-width': 2
     }
   });
 
@@ -69,7 +69,7 @@ map.on('load', () => {
     },
     paint: {
       'line-color': '#FF0000',
-      'line-width': 3
+      'line-width': 2
     }
   });
 
@@ -90,5 +90,9 @@ map.on('load', () => {
       flightPlanMiddleware(data.request.method, data.body)
     }
   });
-})
 
+  const test_dummy = {
+    waypoints: [[-73.5818, 45.3654]]
+  }
+  flightPlanMiddleware("PUT", test_dummy)
+})

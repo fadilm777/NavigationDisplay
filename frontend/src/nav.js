@@ -4,6 +4,7 @@ import { FrameRateService } from './services.js'
 const navCircle = document.getElementById("navCircle")
 let rateHandler = new FrameRateService(30)
 const flapsIndicator = document.getElementById("flapsIndicator")
+let waypoints = []
 
 const navItems = ["GS", "DTK", "TRK", "N1", "N2", "EGT", "DIFF PSI", "ALT FT", "OIL PSI", "OIL C", "FLAPS", "AMPS1", "AMPS2", "VOLTS1", "VOLTS2"]
 const maxRatings = {
@@ -53,6 +54,7 @@ function updateLocation(latitude, longitude, bearing) {
     });
 
     updateNavCircle(bearing)
+    updateFlightPath([longitude, latitude])
 
     rateHandler.setLastUpdate(now)
   }
@@ -91,13 +93,29 @@ function updateNavInfo(data) {
 }
 
 function updateFlightPlan(data) {
+  waypoints = data.waypoints
   const flightPlan = map.getSource('flight-plan')
+
   if (flightPlan) {
     flightPlan.setData({
       'type': 'Feature',
       'geometry': {
         'type': 'LineString',
         'coordinates': data.waypoints
+      }
+    })
+  }
+}
+
+function updateFlightPath(location) {
+  const flightPath = map.getSource('flight-path')
+
+  if (flightPath && waypoints.length != 0) {
+    flightPath.setData({
+      'type': 'Feature',
+      'geometry': {
+        'type': 'LineString',
+        'coordinates': [location, waypoints[0]]
       }
     })
   }
