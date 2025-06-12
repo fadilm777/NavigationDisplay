@@ -29,6 +29,12 @@ export function infoMiddleware(method, data) {
   }
 }
 
+export function flightPlanMiddleware(method, data) {
+  if (method === "PUT") {
+    updateFlightPlan(data)
+  }
+}
+
 function updateNavCircle(bearing) {
   navCircle.style.transform = `translate(-50%, -50%) rotate(${-bearing}deg)`;
 }
@@ -82,4 +88,17 @@ function updateNavInfo(data) {
     updateRating(navItemName, data[navItemName])
   }
 
+}
+
+function updateFlightPlan(data) {
+  const flightPlan = map.getSource('flight-plan')
+  if (flightPlan) {
+    flightPlan.setData({
+      'type': 'Feature',
+      'geometry': {
+        'type': 'LineString',
+        'coordinates': data.waypoints
+      }
+    })
+  }
 }
