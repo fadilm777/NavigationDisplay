@@ -32,7 +32,8 @@ export function infoMiddleware(method, data) {
 
 export function flightPlanMiddleware(method, data) {
   if (method === "PUT") {
-    updateFlightPlan(data)
+    waypoints = data.waypoints
+    updateFlightPlan()
   }
 }
 
@@ -92,8 +93,7 @@ function updateNavInfo(data) {
 
 }
 
-function updateFlightPlan(data) {
-  waypoints = data.waypoints
+function updateFlightPlan() {
   const flightPlan = map.getSource('flight-plan')
 
   if (flightPlan) {
@@ -101,7 +101,7 @@ function updateFlightPlan(data) {
       'type': 'Feature',
       'geometry': {
         'type': 'LineString',
-        'coordinates': data.waypoints
+        'coordinates': waypoints
       }
     })
   }
@@ -110,6 +110,7 @@ function updateFlightPlan(data) {
 function updateFlightPath(location) {
   if (isWithin1Km(location[1], location[0], waypoints[0][1], waypoints[0][0])) {
     waypoints.shift()
+    updateFlightPlan()
   }
 
   const flightPath = map.getSource('flight-path')
