@@ -3,6 +3,11 @@ import { infoMiddleware, locationMiddleware, flightPlanMiddleware } from './src/
 
 // Function to run after map is done rendering
 map.on('load', () => {
+  // Error message to assert addition of api link from maptiler
+  const maptilerSource = map.getSource('maptiler_planet')
+  if (!maptilerSource.url) {
+    document.body.innerHTML = "<h1>ADD API LINK FROM MAPTILER (follow instructions on github readme)</h1>"
+  }
 
   // Add waypoints layer to map style
   map.addLayer({
