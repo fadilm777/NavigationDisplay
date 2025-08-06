@@ -1,0 +1,451 @@
+{
+  "version": 8,
+  "id": "0196b18c-a1b3-78a0-9bcc-98962174c7c4",
+  "name": "Navigation Display",
+  "sources": {
+    "maptiler_attribution": {
+      "attribution": "\u003Ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003E&copy; MapTiler\u003C/a\u003E \u003Ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003E&copy; OpenStreetMap contributors\u003C/a\u003E",
+      "type": "vector"
+    },
+    "maptiler_planet": {
+      "url": "",
+      "type": "vector"
+    },
+    "waypoints": {
+      "type": "geojson",
+      "data": "./assets/waypoints.geojson"
+    }
+  },
+  "layers": [
+    {
+      "id": "Background",
+      "type": "background",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "background-color": {
+          "stops": [
+            [6, "hsl(126,56%,33%)"
+            ],
+            [20, "hsl(126,56%,33%)"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Glacier",
+      "type": "fill",
+      "source": "maptiler_planet",
+      "source-layer": "globallandcover",
+      "maxzoom": 8,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsla(0, 0%, 100%, 0.7)"
+      },
+      "filter": [
+        "==",
+        "class",
+        "snow"
+      ]
+    },
+    {
+      "id": "Forest",
+      "type": "fill",
+      "source": "maptiler_planet",
+      "source-layer": "globallandcover",
+      "maxzoom": 8,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [1, "hsla(91,40%,70%,0.25)"
+            ],
+            [7, "hsla(91,40%,70%,0.6)"
+            ]
+          ]
+        }
+      },
+      "filter": [
+        "in",
+        "class",
+        "forest",
+        "tree"
+      ]
+    },
+    {
+      "id": "Sand",
+      "type": "fill",
+      "source": "maptiler_planet",
+      "source-layer": "landcover",
+      "minzoom": 8,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-antialias": false,
+        "fill-color": "hsla(54,81%,53%,0.3)",
+        "fill-opacity": {
+          "stops": [
+            [7, 0.7],
+            [12, 1]
+          ]
+        }
+      },
+      "filter": [
+        "==",
+        "class",
+        "sand"
+      ]
+    },
+    {
+      "id": "Grass",
+      "type": "fill",
+      "source": "maptiler_planet",
+      "source-layer": "landcover",
+      "minzoom": 8,
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-antialias": false,
+        "fill-color": "hsla(89,40%,78%,0.8)",
+        "fill-opacity": {
+          "stops": [
+            [7, 0.7],
+            [12, 1]
+          ]
+        }
+      },
+      "filter": [
+        "==",
+        "class",
+        "grass"
+      ]
+    },
+    {
+      "id": "Water",
+      "type": "fill",
+      "source": "maptiler_planet",
+      "source-layer": "water",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(235,69%,53%)",
+        "fill-opacity": [
+          "match",
+          [
+            "get",
+            "intermittent"
+          ],
+          1, 0.7, 1]
+      },
+      "filter": [
+        "!=",
+        "brunnel",
+        "tunnel"
+      ]
+    },
+    {
+      "id": "River intermittent",
+      "type": "line",
+      "source": "maptiler_planet",
+      "source-layer": "waterway",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "hsl(205,56%,73%)",
+        "line-dasharray": [2, 1],
+        "line-opacity": 1,
+        "line-width": {
+          "stops": [
+            [9, 1],
+            [18, 3]
+          ]
+        }
+      },
+      "filter": [
+        "==",
+        "intermittent",
+        1]
+    },
+    {
+      "id": "Aeroway",
+      "type": "line",
+      "source": "maptiler_planet",
+      "source-layer": "aeroway",
+      "minzoom": 10,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "hsl(0, 0%, 100%)",
+        "line-opacity": 1,
+        "line-width": [
+          "interpolate",
+          [
+            "linear",
+            2],
+          [
+            "zoom"
+          ],
+          10, [
+            "match",
+            [
+              "get",
+              "class"
+            ],
+            [
+              "runway"
+            ],
+            1, [
+              "taxiway"
+            ],
+            0.5, 0],
+          14, [
+            "match",
+            [
+              "get",
+              "class"
+            ],
+            [
+              "runway"
+            ],
+            3, [
+              "taxiway"
+            ],
+            2, 0],
+          16, [
+            "match",
+            [
+              "get",
+              "class"
+            ],
+            [
+              "runway"
+            ],
+            10, [
+              "taxiway"
+            ],
+            6, 0]
+        ]
+      }
+    },
+    {
+      "id": "Country border",
+      "type": "line",
+      "source": "maptiler_planet",
+      "source-layer": "boundary",
+      "minzoom": 0,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-blur": {
+          "stops": [
+            [4, 0.5],
+            [10, 0]
+          ]
+        },
+        "line-color": "hsl(0,0%,64%)",
+        "line-width": {
+          "stops": [
+            [1, 1],
+            [5, 1.5],
+            [10, 2]
+          ]
+        }
+      },
+      "filter": [
+        "all",
+        [
+          "==",
+          "admin_level",
+          2],
+        [
+          "==",
+          "disputed",
+          0],
+        [
+          "==",
+          "maritime",
+          0]
+      ]
+    },
+    {
+      "id": "City labels",
+      "type": "symbol",
+      "source": "maptiler_planet",
+      "source-layer": "place",
+      "maxzoom": 16,
+      "layout": {
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-field": "{name:en}",
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-max-width": 10,
+        "text-size": [
+          "interpolate",
+          [
+            "linear",
+            1],
+          [
+            "zoom"
+          ],
+          3, 11, 8, 15, 11, 16, 16, 21],
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 0%)",
+        "text-halo-blur": 0,
+        "text-halo-color": "hsla(0, 0%, 100%, 0.75)",
+        "text-halo-width": 2
+      },
+      "filter": [
+        "==",
+        "class",
+        "city"
+      ]
+    },
+    {
+      "id": "Country labels",
+      "type": "symbol",
+      "source": "maptiler_planet",
+      "source-layer": "place",
+      "minzoom": 1,
+      "maxzoom": 12,
+      "layout": {
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-field": "{name:en}",
+        "text-font": [
+          "Noto Sans Bold"
+        ],
+        "text-max-width": 8,
+        "text-padding": {
+          "stops": [
+            [1, 0],
+            [4, 2]
+          ]
+        },
+        "text-size": [
+          "interpolate",
+          [
+            "linear",
+            1],
+          [
+            "zoom"
+          ],
+          0, 8, 1, 10, 4, [
+            "case",
+            [
+              "\u003E",
+              [
+                "get",
+                "rank"
+              ],
+              2],
+            13, 15],
+          8, [
+            "case",
+            [
+              "\u003E",
+              [
+                "get",
+                "rank"
+              ],
+              2],
+            18, 22]
+        ],
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 13%)",
+        "text-halo-blur": 1,
+        "text-halo-color": "hsla(0, 0%, 100%, 0.75)",
+        "text-halo-width": 2
+      },
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "country"
+        ],
+        [
+          "!=",
+          "iso_a2",
+          "VA"
+        ]
+      ]
+    },
+    {
+      "id": "Continent labels",
+      "type": "symbol",
+      "source": "maptiler_planet",
+      "source-layer": "place",
+      "maxzoom": 1,
+      "layout": {
+        "text-field": "{name:en}",
+        "text-font": [
+          "Noto Sans Bold"
+        ],
+        "text-justify": "center",
+        "text-size": {
+          "stops": [
+            [0, 12],
+            [2, 13]
+          ]
+        },
+        "text-transform": "uppercase",
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "hsl(0, 0%, 13%)",
+        "text-halo-blur": 1,
+        "text-halo-color": "hsla(0, 0%, 100%, 0.75)",
+        "text-halo-width": 2
+      },
+      "metadata": {
+
+      },
+      "filter": [
+        "==",
+        "class",
+        "continent"
+      ]
+    }
+  ],
+  "metadata": {
+    "maptiler:copyright": "You are licensed to use the style or its derivate for serving map tiles exclusively with MapTiler Server or MapTiler Cloud and in accordance with their licenses and terms. If you plan to use the style in a different way, contact us at sales@maptiler.com."
+  },
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=jK81fqUCaUa9XZ2YXed8",
+  "sprite": "https://api.maptiler.com/maps/0196b18c-a1b3-78a0-9bcc-98962174c7c4/sprite",
+  "bearing": 0,
+  "pitch": 0,
+  "center": [0, 0],
+  "zoom": 1
+}
