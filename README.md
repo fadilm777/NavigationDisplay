@@ -37,10 +37,18 @@ After installing **FlyWithLua**, copy the custom Lua script from this repo (`Fly
    ```
    Refer to this [documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5) by microsoft to enable execution of scripts on your machine if disabled.
 
-4. Install `live-server` Globally
+3. Install `live-server` Globally
    ```
    npm install -g live-server
    ```
+4. Add the api key link to mapstyle.json
+   - Log into [maptiler](https://www.maptiler.com/) and [publish](https://docs.maptiler.com/guides/map-design/how-to-publish-a-map/) a standard map of your liking.
+   - Copy the _vector style_ api link
+   - paste the link on _line 11 in the_ `url` _section_ into `frontend/mapstyle.json`
+     
+     ```
+     "url": "YOUR_API_LINK",
+     ```
 5. Run the software
    From the root directory of this repo:
    ```
@@ -48,7 +56,7 @@ After installing **FlyWithLua**, copy the custom Lua script from this repo (`Fly
    ```
    This will start the backend Python server and launch the frontend in a browser window pointing to `http://localhost:8080`.
    If the browser window does not open automatically, navigate manually to `http://localhost:8080`.
-6. Configuration in Ingescape
+6. Configuration in Ingescape Circle
    - Launch Ingescape Circle.
    - Connect Ingescape Circle to Ethernet|Port:5670.
    - Connect the output points from _xplane_position_agent_ to the input points of _gps agent_.
