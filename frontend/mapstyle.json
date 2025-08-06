@@ -8,7 +8,7 @@
       "type": "vector"
     },
     "maptiler_planet": {
-      "url": "",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=YOUR_API_KEY",
       "type": "vector"
     },
     "waypoints": {
