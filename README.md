@@ -42,12 +42,12 @@ After installing **FlyWithLua**, copy the custom Lua script from this repo (`Fly
    npm install -g live-server
    ```
 4. Add the api key link to mapstyle.json
-   - Log into [maptiler](https://www.maptiler.com/) and [publish](https://docs.maptiler.com/guides/map-design/how-to-publish-a-map/) a standard map of your liking.
-   - Copy the _vector style_ api link
-   - paste the link on _line 11 in the_ `url` _section_ into `frontend/mapstyle.json`
+   - Log into [maptiler](https://www.maptiler.com/) and [create an api key](https://docs.maptiler.com/cloud/api/authentication-key/).
+   - Copy the api key.
+   - Replace `YOUR_API_KEY` with your key on _line 11_ of `frontend/mapstyle.json`
      
      ```
-     "url": "YOUR_API_LINK",
+     "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=YOUR_API_LINK",
      ```
 5. Run the software
    From the root directory of this repo:
