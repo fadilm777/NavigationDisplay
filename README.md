@@ -47,7 +47,7 @@ After installing **FlyWithLua**, copy the custom Lua script from this repo (`Fly
    - Replace `YOUR_API_KEY` with your key on _line 11_ of `frontend/mapstyle.json`
      
      ```
-     "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=YOUR_API_LINK",
+     "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=YOUR_API_KEY",
      ```
 5. Run the software
    From the root directory of this repo:
