@@ -1,9 +1,10 @@
 import { map } from './src/map.js'
 import { infoMiddleware, locationMiddleware, flightPlanMiddleware } from './src/nav.js';
 
-
+// Function to run after map is done rendering
 map.on('load', () => {
 
+  // Add waypoints layer to map style
   map.addLayer({
     "id": "Waypoints",
     "type": "symbol",
@@ -21,7 +22,7 @@ map.on('load', () => {
     }
   })
 
-  // flight path joining waypoints
+  // Add flight path joining waypoints
   map.addSource('flight-plan', {
     'type': 'geojson',
     'data': {
@@ -33,6 +34,7 @@ map.on('load', () => {
     }
   })
 
+  // Add flight plan layer to map style
   map.addLayer({
     id: 'flight-plan',
     type: 'line',
@@ -47,7 +49,7 @@ map.on('load', () => {
     }
   });
 
-  // flight path joining plane and next waypoint
+  // Add flight path joining plane icon and next waypoint
   map.addSource('flight-path', {
     'type': 'geojson',
     'data': {
@@ -73,8 +75,10 @@ map.on('load', () => {
     }
   });
 
+  // Connect to backend websocket server
   var socket = new WebSocket("ws://127.0.0.1:8325")
 
+  // Runs everytime a message is received from backend
   socket.addEventListener("message", (event) => {
     const data = JSON.parse(event.data)
 
@@ -91,8 +95,9 @@ map.on('load', () => {
     }
   });
 
-  const test_dummy = {
-    waypoints: [[-73.5818, 45.3654]]
-  }
-  flightPlanMiddleware("PUT", test_dummy)
+  // Example addition of flight-plan
+  // const test_dummy = {
+  //   waypoints: [[-73.5818, 45.3654]]
+  // }
+  // flightPlanMiddleware("PUT", test_dummy)
 })

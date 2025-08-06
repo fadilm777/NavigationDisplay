@@ -2,7 +2,7 @@ import { map } from './map.js'
 import { FrameRateService } from './services.js'
 
 const navCircle = document.getElementById("navCircle")
-let rateHandler = new FrameRateService(30)
+let rateHandler = new FrameRateService(30) // Restrict position updates to 30 FPS
 const flapsIndicator = document.getElementById("flapsIndicator")
 let waypoints = []
 
@@ -38,6 +38,7 @@ export function flightPlanMiddleware(method, data) {
 }
 
 function updateNavCircle(bearing) {
+  // Rotate nav circle on map
   navCircle.style.transform = `translate(-50%, -50%) rotate(${-bearing}deg)`;
 }
 
@@ -46,7 +47,9 @@ function updateFlapsRating(rating) {
 }
 
 function updateLocation(latitude, longitude, bearing) {
+  // Store current time for framerate service
   const now = Date.now();
+  // Update location with framerate restriction
   if (now - rateHandler.getLastupdate() > rateHandler.getThrottleMs()) {
     map.easeTo({
       center: [longitude, latitude],
@@ -108,6 +111,7 @@ function updateFlightPlan() {
 }
 
 function updateFlightPath(location) {
+  // Shift to next waypoint if current waypoint target is within 1Km
   if (isWithin1Km(location[1], location[0], waypoints[0][1], waypoints[0][0])) {
     waypoints.shift()
     updateFlightPlan()
@@ -115,6 +119,7 @@ function updateFlightPath(location) {
 
   const flightPath = map.getSource('flight-path')
 
+  // Update flight path with respect to current location
   if (flightPath && waypoints.length != 0) {
     flightPath.setData({
       'type': 'Feature',
@@ -126,6 +131,7 @@ function updateFlightPath(location) {
   }
 }
 
+// Verify if two geolocations are within 1Km
 function isWithin1Km(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of the Earth in kilometers
   const dLat = toRad(lat2 - lat1);
@@ -142,6 +148,7 @@ function isWithin1Km(lat1, lon1, lat2, lon2) {
   return distance <= 1;
 }
 
+// Convert degrees to radians
 function toRad(value) {
   return value * Math.PI / 180;
 }
