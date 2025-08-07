@@ -35,7 +35,7 @@ After installing **FlyWithLua**, copy the custom Lua script from this repo (`Fly
    venv\Scripts\activate
    pip install -r requirements.txt
    ```
-   Refer to this [documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5) by microsoft to enable execution of scripts on your machine if disabled.
+   Refer to this [documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5) by microsoft to enable execution of scripts on your machine _if disabled_.
 
 3. Install `live-server` Globally
    ```
